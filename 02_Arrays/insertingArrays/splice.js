@@ -6,6 +6,6 @@ console.log(arr);
 
 // Third way of inserting array elements
 // Time Complexity O(1)
-// Space Complexity O(N)
+// Space Complexity O(1)
 
 // Note : if we are adding multiple elements then the space complexity becomes O(k)
