@@ -26,4 +26,26 @@ function validAnagram(str1, str2) {
   return true;
 }
 
-console.log(validAnagram("aaz", "zza"));
+// console.log(validAnagram("aaz", "zza"));
+
+function vaalidAnagram(str1, str2) {
+  if (str1.length !== str2.length) return false;
+
+  let lookup = {};
+
+  for (let i = 0; i < str1.length; i++) {
+    let letter = str1[i];
+    lookup[letter] ? (lookup[letter] += 1) : (lookup[letter] = 1);
+  }
+
+  for (let i = 0; i < str2.length; i++) {
+    if (!lookup[str2[i]]) {
+      return false;
+    }
+    lookup[str2[i]]--;
+  }
+
+  return true;
+}
+
+console.log(vaalidAnagram("aaz", "zza"));
