@@ -1,0 +1,35 @@
+// Example 1:
+// Input: strs = ["eat","tea","tan","ate","nat","bat"]
+// Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+
+// Explanation:
+// There is no string in strs that can be rearranged to form "bat".
+// The strings "nat" and "tan" are anagrams as they can be rearranged to form each other.
+// The strings "ate", "eat", and "tea" are anagrams as they can be rearranged to form each other.
+// Example 2:
+
+// Input: strs = [""]
+// Output: [[""]]
+
+// Example 3:
+// Input: strs = ["a"]
+
+// Output: [["a"]]
+
+function groupAnagrams(strs) {
+  let ele = new Map();
+
+  for (let word of strs) {
+    let key = word.split("").sort().join("");
+
+    if (!ele.has(key)) {
+      ele.set(key, []);
+    }
+
+    ele.get(key).push(word);
+  }
+
+  return [...ele.values()];
+}
+
+console.log(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]));
