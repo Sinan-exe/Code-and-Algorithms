@@ -25,6 +25,18 @@ class LinkedList {
     return result;
   }
 
+  prepand(value) {
+    const newNode = new Node(value);
+    if (this.length === 0) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+    this.length++;
+  }
+
   append(value) {
     let newNode = new Node(value);
     if (this.length === 0) {
@@ -43,4 +55,6 @@ newLinkedList.append(10);
 newLinkedList.append(20);
 newLinkedList.append(30);
 newLinkedList.append(40);
+newLinkedList.prepand(50);
 console.log(newLinkedList.toString());
+console.log(newLinkedList);
