@@ -11,6 +11,20 @@ class LinkedList {
     this.tail = null;
     this.length = 0;
   }
+
+  toString() {
+    let tempNode = this.head;
+    let result = "";
+    while (tempNode !== null) {
+      result += tempNode.value;
+      if (tempNode.next !== null) {
+        result += "->";
+      }
+      tempNode = tempNode.next;
+    }
+    return result;
+  }
+
   append(value) {
     let newNode = new Node(value);
     if (this.length === 0) {
@@ -29,4 +43,4 @@ newLinkedList.append(10);
 newLinkedList.append(20);
 newLinkedList.append(30);
 newLinkedList.append(40);
-console.log(newLinkedList);
+console.log(newLinkedList.toString());
