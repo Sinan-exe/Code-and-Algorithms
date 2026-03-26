@@ -48,6 +48,16 @@ class LinkedList {
     }
     this.length++;
   }
+
+  insert(value, index) {
+    const newNode = new Node(value);
+    let tempNode = this.head;
+    for (let i = 0; i < index - 1; i++) {
+      tempNode = tempNode.next;
+    }
+    newNode.next = tempNode.next;
+    tempNode.next = newNode;
+  }
 }
 
 const newLinkedList = new LinkedList();
@@ -56,5 +66,6 @@ newLinkedList.append(20);
 newLinkedList.append(30);
 newLinkedList.append(40);
 newLinkedList.prepand(50);
+newLinkedList.insert(5, 1);
 console.log(newLinkedList.toString());
 console.log(newLinkedList);
