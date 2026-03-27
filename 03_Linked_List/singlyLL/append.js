@@ -12,17 +12,16 @@ class LinkedList {
     this.length = 0;
   }
 
-  toString() {
-    let tempNode = this.head;
-    let result = "";
-    while (tempNode !== null) {
-      result += tempNode.value;
-      if (tempNode.next !== null) {
-        result += "->";
-      }
-      tempNode = tempNode.next;
+  append(value) {
+    const newNode = new Node(value);
+    if (this.length === 0) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      this.tail.next = newNode;
+      this.tail = newNode;
     }
-    return result;
+    this.length++;
   }
 
   prepand(value) {
@@ -37,26 +36,42 @@ class LinkedList {
     this.length++;
   }
 
-  append(value) {
-    let newNode = new Node(value);
-    if (this.length === 0) {
-      this.head = newNode;
-      this.tail = newNode;
-    } else {
-      this.tail.next = newNode;
-      this.tail = newNode;
+  toString() {
+    let tempNode = this.head;
+    let result = "";
+    while (tempNode !== null) {
+      result += tempNode.value;
+      if (tempNode.next !== null) {
+        result += "->";
+      }
+      tempNode = tempNode.next;
     }
-    this.length++;
+    return result;
   }
 
   insert(value, index) {
     const newNode = new Node(value);
-    let tempNode = this.head;
-    for (let i = 0; i < index - 1; i++) {
-      tempNode = tempNode.next;
+    if (index < -1 || index > this.length) {
+      return false;
+    } else if (this.length === 0) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else if (index === 0) {
+      newNode.next = this.head;
+      this.head = newNode;
+    } else if (index === -1 || index === this.length) {
+      this.tail.next = newNode;
+      this.tail = newNode;
+    } else {
+      let tempNode = this.head;
+      for (let i = 0; i < index - 1; i++) {
+        tempNode = tempNode.next;
+      }
+      newNode.next = tempNode.next;
+      tempNode.next = newNode;
     }
-    newNode.next = tempNode.next;
-    tempNode.next = newNode;
+    this.length++;
+    return true;
   }
 }
 
@@ -64,8 +79,9 @@ const newLinkedList = new LinkedList();
 newLinkedList.append(10);
 newLinkedList.append(20);
 newLinkedList.append(30);
-newLinkedList.append(40);
-newLinkedList.prepand(50);
-newLinkedList.insert(5, 1);
+newLinkedList.prepand(40);
+newLinkedList.insert(5, 0);
+newLinkedList.insert(15, -1);
+newLinkedList.insert(35, 10);
+
 console.log(newLinkedList.toString());
-console.log(newLinkedList);
