@@ -95,6 +95,19 @@ class LinkedList {
 
     return -1;
   }
+
+  getIndexof(index) {
+    let current = this.head;
+    let i = 0;
+    while (current !== null) {
+      if (i === index) {
+        return current.value;
+      }
+      i++;
+      current = current.next;
+    }
+    return null;
+  }
 }
 
 const newLinkedList = new LinkedList();
@@ -107,4 +120,4 @@ newLinkedList.append(40);
 // newLinkedList.insert(35, 10);
 
 console.log(newLinkedList.toString());
-console.log(newLinkedList.search(40));
+console.log(newLinkedList.getIndexof(3));
