@@ -207,7 +207,7 @@ class LinkedList {
   }
 
   get(index) {
-    if (index < -1 || index > this.length) {
+    if (index < -1 || index >= this.length) {
       return null;
     } else if (index === -1 || index === this.length) {
       return this.tail.value;
@@ -217,7 +217,6 @@ class LinkedList {
         current = current.next;
       }
     }
-
     return current.value;
   }
 }
@@ -228,4 +227,4 @@ newLinkedList.append(20);
 newLinkedList.append(30);
 newLinkedList.insert(40, 3);
 console.log(newLinkedList.toString());
-console.log(newLinkedList.get(6));
+console.log(newLinkedList.get(3));
