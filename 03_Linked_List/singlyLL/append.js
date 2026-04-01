@@ -264,6 +264,18 @@ class LinkedList {
     this.length++;
   }
 
+  prepand(value) {
+    const newNode = new Node(value);
+    if (this.length === 0) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+    this.length++;
+  }
+
   toString() {
     let tempNode = this.head;
     let result = "";
@@ -277,21 +289,11 @@ class LinkedList {
     return result;
   }
 
-  prepand(value) {
-    const newNode = new Node(value);
-    if (this.length === 0) {
-      this.head = newNode;
-      this.tail = newNode;
-    } else {
-      newNode.next = this.head;
-      this.head = newNode;
-    }
-    this.length++;
-  }
-
   insert(index, value) {
     const newNode = new Node(value);
-    if (this.length === 0) {
+    if (index < -1 || index > this.length) {
+      return false;
+    } else if (this.length === 0) {
       this.head = newNode;
       this.tail = newNode;
     } else if (index === 0) {
@@ -300,8 +302,6 @@ class LinkedList {
     } else if (index === -1) {
       this.tail.next = newNode;
       this.tail = newNode;
-    } else if (index < -1 || index > this.length) {
-      return false;
     } else {
       let current = this.head;
       for (let i = 0; i < index - 1; i++) {
@@ -322,10 +322,10 @@ class LinkedList {
     }
   }
 
-  search(target) {
+  search(value) {
     let current = this.head;
     while (current !== null) {
-      if (current.value === target) {
+      if (current.value === value) {
         return true;
       }
       current = current.next;
@@ -333,34 +333,38 @@ class LinkedList {
     return false;
   }
 
-  get(index) {
+  getIndexOf(index) {
     if (index < -1 || index >= this.length) {
       return null;
     } else if (index === -1) {
       return this.tail;
+    } else {
+      let current = this.head;
+      for (let i = 0; i < index; i++) {
+        current = current.next;
+      }
+      return current;
     }
-    let current = this.head;
-    for (let i = 0; i < index; i++) {
-      current = current.next;
-    }
-    return current;
   }
 
   setValue(index, value) {
-    const node = this.get(index);
+    let node = this.getIndexOf(index);
     if (node) {
       node.value = value;
       return true;
+    } else {
+      return false;
     }
-    return false;
   }
 }
 
 const newLinkedList = new LinkedList();
-newLinkedList.insert(0, 10);
-newLinkedList.insert(-1, 100);
+console.log(newLinkedList.insert(0, 10));
+console.log(newLinkedList.insert(-1, 20));
+console.log(newLinkedList.insert(2, 30));
+console.log(newLinkedList.toString());
 newLinkedList.traverse();
 console.log(newLinkedList.search(20));
-console.log(newLinkedList.get(1));
-newLinkedList.setValue(1, 500);
+console.log(newLinkedList.getIndexOf(4));
+console.log(newLinkedList.setValue(2, 40));
 console.log(newLinkedList.toString());
