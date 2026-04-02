@@ -356,15 +356,42 @@ class LinkedList {
       return false;
     }
   }
+
+  popFirst() {
+    const poppedNode = this.head;
+    if (this.length === 0) {
+      return null;
+    } else if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.head = this.head.next;
+      poppedNode.next = null;
+    }
+    this.length--;
+    return poppedNode;
+  }
+
+  pop() {
+    const poppedNode = this.tail;
+    let tempNode = this.head;
+    while (tempNode.next !== this.tail) {
+      tempNode = tempNode.next;
+    }
+    this.tail = tempNode;
+    tempNode.next = null;
+    this.length--;
+    return poppedNode;
+  }
 }
 
 const newLinkedList = new LinkedList();
 console.log(newLinkedList.insert(0, 10));
 console.log(newLinkedList.insert(-1, 20));
 console.log(newLinkedList.insert(2, 30));
+// console.log(newLinkedList.search(20));
+// console.log(newLinkedList.getIndexOf(4));
+// console.log(newLinkedList.setValue(2, 40));
 console.log(newLinkedList.toString());
-newLinkedList.traverse();
-console.log(newLinkedList.search(20));
-console.log(newLinkedList.getIndexOf(4));
-console.log(newLinkedList.setValue(2, 40));
+console.log(newLinkedList.pop());
 console.log(newLinkedList.toString());
